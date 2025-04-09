@@ -1,0 +1,8 @@
+services:
+  cloudflare-ddns:
+    image: mattolenik/cloudflare-ddns-client
+    container_name: cloudflare-ddns
+    environment: 
+      - DOMAIN=noraw.app 
+      - RECORD=home.noraw.app 
+      - TOKEN=$CLOUDFLARE_TOKEN

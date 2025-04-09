@@ -1,0 +1,26 @@
+services:
+  homarr:
+    container_name: nora-homarr
+    image: ghcr.io/homarr-labs/homarr:latest
+    restart: unless-stopped
+    volumes:
+      - homarr:/appdata
+    env_file: ".env"
+    environment:
+      NODE_TLS_REJECT_UNAUTHORIZED: 0
+    ports:
+      - '7574:7575'
+    networks:
+      - proxy
+    labels:
+      caddy: home.noraw.app
+      caddy.reverse_proxy: "{{upstreams 7575}}"
+      caddy.tls.dns: "cloudflare ${API_Key}"
+      caddy.tls.resolvers: "1.1.1.1"
+
+volumes:
+  homarr:
+
+networks:
+  proxy:
+    external: true

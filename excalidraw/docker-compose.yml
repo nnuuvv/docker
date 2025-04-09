@@ -1,0 +1,33 @@
+services:
+  excalidraw:
+    image: excalidraw/excalidraw:latest
+    container_name: excalidraw
+    hostname: "draw.nuv.systems"    
+    restart: unless-stopped
+    stdin_open: true
+    healthcheck:
+      disable: true
+    environment:
+      - NODE_ENV=production
+    networks:
+      - proxy
+    labels:
+      caddy: draw.nuv.systems
+      caddy.reverse_proxy: "{{upstreams 80}}"
+      caddy.tls.dns: "ionos ${API_Key}"
+      caddy.tls.resolvers: "1.1.1.1"
+    volumes:
+      - data:/opt/node_app/app:delegated
+      - data:/opt/node_app/package.json
+      - data:/opt/node_app/yarn.lock
+      - notused:/opt/node_app/app/node_modules
+
+
+
+volumes:
+  notused:
+  data:
+
+networks: 
+  proxy:
+    external: true

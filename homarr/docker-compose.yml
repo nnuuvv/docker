@@ -4,6 +4,7 @@ services:
     image: ghcr.io/homarr-labs/homarr:latest
     restart: unless-stopped
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
       - homarr:/appdata
     env_file: ".env"
     environment:

@@ -1,6 +1,6 @@
 services:
   git:
-    image: codeberg.org/forgejo/forgejo:10
+    image: codeberg.org/forgejo/forgejo:11
     restart: unless-stopped      
     container_name: git
     environment: 
@@ -11,7 +11,7 @@ services:
       - FORGEJO__database__PASSWD=forgejo
       - FORGEJO__DEFAULT__APP_NAME="Butter dog"
       - FORGEJO__DEFAULT__APP_SLOGAN="the dog with the butter"
-      - FORGEJO__server__ROOT_URL=https://git.nuv.systems
+      - FORGEJO__server__ROOT_URL=https://git.nuv.sh
       - FORGEJO__server__OFFLINE_MODE=false
       - FORGEJO__mirror__ENABLED=true
     networks:
@@ -22,9 +22,11 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     labels:
-      caddy: git.nuv.systems
+      caddy: git.nuv.sh
       caddy.reverse_proxy: "{{upstreams 3000}}"
-      caddy.tls.dns: "ionos ${API_Key}"
+      caddy.tls.dns: "porkbun"
+      caddy.tls.dns.api_key: "${API_KEY}"
+      caddy.tls.dns.api_secret_key: "${API_SECRET}"
       caddy.tls.resolvers: "1.1.1.1"
     depends_on: 
       - db

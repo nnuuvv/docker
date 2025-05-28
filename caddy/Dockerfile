@@ -2,8 +2,8 @@ FROM caddy:builder AS builder
 
 RUN xcaddy build \
     --with github.com/lucaslorentz/caddy-docker-proxy/v2 \
-    --with github.com/caddy-dns/cloudflare@1fb6410 \
-    --with github.com/caddy-dns/ionos
+    --with github.com/caddy-dns/cloudflare \
+    --with github.com/caddy-dns/porkbun 
 
 FROM caddy:alpine
 

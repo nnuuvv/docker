@@ -1,6 +1,6 @@
 {
   "default_server_config": {
-    "m.homeserver": "matrix.nuv.systems:443"
+    "base_url": "matrix.nuv.systems:443"
   } 
 }
 

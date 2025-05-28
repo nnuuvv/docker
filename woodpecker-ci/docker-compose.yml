@@ -24,7 +24,9 @@ services:
     labels:
       caddy: ${WOODPECKER_HOST}
       caddy.reverse_proxy: "{{upstreams 8000}}"
-      caddy.tls.dns: "ionos ${API_Key}"
+      caddy.tls.dns: "porkbun"
+      caddy.tls.dns.api_key: "${API_KEY}"
+      caddy.tls.dns.api_secret_key: "${API_SECRET}"
       caddy.tls.resolvers: "1.1.1.1"
 
 

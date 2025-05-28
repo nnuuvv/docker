@@ -1,6 +1,0 @@
-services:
-  ddns-updater:
-    image: ghcr.io/nnuuvv/ionos-ddns-updater:latest
-    container_name: ionos-ddns-updater
-    restart: unless-stopped
-    env_file: ".env" 

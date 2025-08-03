@@ -22,12 +22,18 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     labels:
-      caddy: git.nuv.sh
-      caddy.reverse_proxy: "{{upstreams 3000}}"
-      caddy.tls.dns: "porkbun"
-      caddy.tls.dns.api_key: "${API_KEY}"
-      caddy.tls.dns.api_secret_key: "${API_SECRET}"
-      caddy.tls.resolvers: "1.1.1.1"
+      caddy_0: git.nuv.sh
+      caddy_0.reverse_proxy: "{{upstreams 3000}}"
+      caddy_0.tls.dns: "porkbun"
+      caddy_0.tls.dns.api_key: "${API_KEY}"
+      caddy_0.tls.dns.api_secret_key: "${API_SECRET}"
+      caddy_0.tls.resolvers: "1.1.1.1"
+      caddy_1: ssh.git.nuv.sh
+      caddy_1.reverse_proxy: "{{upstreams 22}}"
+      caddy_1.tls.dns: "porkbun"
+      caddy_1.tls.dns.api_key: "${API_KEY}"
+      caddy_1.tls.dns.api_secret_key: "${API_SECRET}"
+      caddy_1.tls.resolvers: "1.1.1.1"
     depends_on: 
       - db
 

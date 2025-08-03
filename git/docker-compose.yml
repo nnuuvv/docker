@@ -17,6 +17,8 @@ services:
     networks:
       - proxy
       - forgejo
+    ports:
+      - "222:22"
     volumes:
       - forgejo:/data
       - /etc/timezone:/etc/timezone:ro
@@ -28,12 +30,6 @@ services:
       caddy_0.tls.dns.api_key: "${API_KEY}"
       caddy_0.tls.dns.api_secret_key: "${API_SECRET}"
       caddy_0.tls.resolvers: "1.1.1.1"
-      caddy_1: ssh.git.nuv.sh
-      caddy_1.reverse_proxy: "{{upstreams 22}}"
-      caddy_1.tls.dns: "porkbun"
-      caddy_1.tls.dns.api_key: "${API_KEY}"
-      caddy_1.tls.dns.api_secret_key: "${API_SECRET}"
-      caddy_1.tls.resolvers: "1.1.1.1"
     depends_on: 
       - db
 

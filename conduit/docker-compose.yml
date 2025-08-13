@@ -41,6 +41,7 @@ services:
           caddy_1: nuv.sh
           caddy_1.0_respond: '/.well-known/matrix/server "{ \"m.server\": \"matrix.nuv.sh:443\" }"'
           caddy_1.1_respond: '/.well-known/matrix/client "{ \"m.homeserver\": \"matrix.nuv.sh:443\" }"'
+          caddy_1.2_respond: '/.well-known/discord "dh=023d0b537a304733396fb55473914402092b66dc'
 
     #mautrix-discord:
     #  container_name: mautrix-discord

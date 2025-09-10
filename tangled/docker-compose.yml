@@ -35,3 +35,5 @@ services:
       caddy_0.tls.dns.api_key: "${API_KEY}"
       caddy_0.tls.dns.api_secret_key: "${API_SECRET}"
       caddy_0.tls.resolvers: "1.1.1.1"
+      caddy_1: nuv.sh
+      caddy_1.0_respond: '/.well-known/atproto-did "${KNOT_SERVER_OWNER}"'

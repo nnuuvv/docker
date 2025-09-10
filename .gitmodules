@@ -1,3 +1,6 @@
 [submodule "caddy"]
 	path = caddy
 	url = https://github.com/nnuuvv/caddy-build
+[submodule "tangled/knot-docker"]
+	path = tangled/knot-docker
+	url = https://tangled.sh/@tangled.sh/knot-docker

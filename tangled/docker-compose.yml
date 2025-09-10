@@ -1,0 +1,37 @@
+volumes:
+  tangled_keys:
+  tangled_repos:
+  tangled_server:
+
+networks:
+  proxy:
+    external: true
+
+services: 
+  knot:
+    build: 
+      context: ./knot-docker/
+      args: { TAG: master }
+    restart: unless-stopped
+    container_name: tangled_knot
+    environment: 
+      KNOT_SERVER_HOSTNAME: knot.nuv.sh
+      KNOT_SERVER_OWNER: ${KNOT_SERVER_OWNER}
+      KNOT_SERVER_DB_PATH: /app/knotservr.db
+      KNOT_REPO_SCAN_PATH: /home/git/repositories
+      KNOT_SERVER_INTERNAL_LISTEN_ADDR: localhost:5444
+    volumes:
+      - tangled_keys:/etc/ssh/keys
+      - tangled_repos:/home/git/repositories
+      - tangled_server:/app
+    ports: 
+      - "2222:22"
+    networks:
+      - proxy
+    labels:
+      caddy_0: knot.nuv.sh
+      caddy_0.reverse_proxy: "{{upstreams 5555}}"
+      caddy_0.tls.dns: "porkbun"
+      caddy_0.tls.dns.api_key: "${API_KEY}"
+      caddy_0.tls.dns.api_secret_key: "${API_SECRET}"
+      caddy_0.tls.resolvers: "1.1.1.1"

@@ -4,7 +4,7 @@ services:
     container_name: porkbun-ddns
     environment:
       DOMAIN: "nuv.sh" # Your Porkbun domain
-      SUBDOMAINS: "@,git,draw,portainer,ci,pdf,matrix,chat,cv,storage.cv"
+      SUBDOMAINS: "@,git,draw,portainer,ci,pdf,matrix,chat,cv,storage.cv,knot"
       SECRETAPIKEY: "${API_SECRET}" # Your Porkbun Secret-API-Key
       APIKEY: "${API_KEY}" # Your Porkbun API-Key
     restart: unless-stopped

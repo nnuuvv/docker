@@ -18,9 +18,12 @@ services:
       - atuin_config:/config
     environment:
       ATUIN_HOST: "0.0.0.0"
+      ATUIN_PORT: 8888
       ATUIN_OPEN_REGISTRATION: "false"
       ATUIN_DB_URI: postgres://${ATUIN_DB_USERNAME}:${ATUIN_DB_PASSWORD}@db/${ATUIN_DB_NAME}
       RUST_LOG: info,atuin_server=debug
+    #ports:
+      #- 8888:8888
     depends_on:
       - db
     networks:

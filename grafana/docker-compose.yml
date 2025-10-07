@@ -1,0 +1,19 @@
+volumes: 
+  grafana-storage:
+
+services:
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    labels:
+      caddy_0: grafana.nuv.sh
+      caddy_0.reverse_proxy: "{{upstreams 3000}}"
+      caddy_0.tls.dns: "porkbun"
+      caddy_0.tls.dns.api_key: "${API_KEY}"
+      caddy_0.tls.dns.api_secret_key: "${API_SECRET}"
+      caddy_0.tls.resolvers: "1.1.1.1"

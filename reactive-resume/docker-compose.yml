@@ -64,8 +64,6 @@ services:
   app:
     image: amruthpillai/reactive-resume:latest
     restart: unless-stopped
-    ports:
-      - "3000:3000"
     depends_on:
       - postgres
       - minio

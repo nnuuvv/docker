@@ -1,0 +1,43 @@
+networks:
+  proxy:
+    external: true
+  
+services:
+  enigmatica_2_expert:
+    container_name: e2e
+    restart: unless-stopped
+    image: itzg/minecraft-server:java8
+    tty: true
+    stdin_open: true
+    environment:
+      EULA: "TRUE"
+      TYPE: "AUTO_CURSEFORGE"
+      CF_API_KEY: "${CF_API_KEY}"
+      CF_SLUG: "enigmatica2expert"
+      MEMORY: 8G 
+      MOTD: |
+        Bananabread at work today dude? HELL YEA!
+      EXISTING_WHITELIST_FILE: MERGE
+      WHITELIST: |
+        nnuuvv
+        ViTheEgg
+      ALLOW_FLIGHT: true
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+      
+    volumes:
+      # attach the relative directory 'data' to the container's /data path
+      - ./e2e-data:/data
+    ports:
+      - "25565:25565"
+      - "25567:25567"
+    networks:
+      - proxy
+    labels:
+      caddy_0: craft.nuv.sh
+      caddy_0.tls.dns: "porkbun"
+      caddy_0.tls.dns.api_key: "${API_KEY}"
+      caddy_0.tls.dns.api_secret_key: "${API_SECRET}"
+      caddy_0.tls.resolvers: "1.1.1.1" 

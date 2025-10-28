@@ -1,6 +1,7 @@
 volumes: 
   grafana-storage:
 networks:
+  grafana:
   proxy:
     external: true
 
@@ -14,6 +15,7 @@ services:
     volumes:
       - grafana-storage:/var/lib/grafana
     networks:
+      - grafana
       - proxy
     labels:
       caddy_0: grafana.nuv.sh

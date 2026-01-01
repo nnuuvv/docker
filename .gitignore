@@ -1,2 +1,6 @@
 .env
+*.env
 *data*
+registration.yaml
+*.log
+*.log.gz

@@ -31,6 +31,7 @@ services:
             CONDUIT_CONFIG: '' # Ignore this
         networks:
           - proxy
+          - matrix
         labels:
           caddy_0: matrix.nuv.sh
           caddy_0.reverse_proxy: "{{upstreams 6167}}"
@@ -43,13 +44,30 @@ services:
           caddy_1.1_respond: '/.well-known/matrix/client "{ \"m.homeserver\": \"matrix.nuv.sh:443\" }"'
           caddy_1.2_respond: '/.well-known/discord "dh=023d0b537a304733396fb55473914402092b66dc'
 
-    #mautrix-discord:
-    #  container_name: mautrix-discord
-    #  image: dock.mau.dev/mautrix/discord:<version>
-    #  restart: unless-stopped
-    #  volumes:
-    #  - ./mautrix-discord:/data
-     
+    mautrix-discord:
+      container_name: mautrix-discord
+      image: dock.mau.dev/mautrix/discord:latest
+      restart: unless-stopped
+      networks:
+        - matrix
+      volumes:
+      - ./mautrix-discord:/data
+
+    postgres:
+      image: postgres:16-alpine
+      restart: unless-stopped
+      volumes:
+        - postgres_data:/var/lib/postgresql/data
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+      networks:
+        - matrix 
+      healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+        interval: 10s
+        timeout: 5s
+        retries: 5
       
     #element-web:
       #image: vectorim/element-web:latest
@@ -69,7 +87,9 @@ services:
 
 volumes:
     db:
+    postgres_data:
 
 networks:
+  matrix:
   proxy:
     external: true

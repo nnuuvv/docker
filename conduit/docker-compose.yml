@@ -53,6 +53,15 @@ services:
       volumes:
       - ./mautrix-discord:/data
 
+#    mautrix-telegram:
+#      container_name: mautrix-telegram
+#      image: dock.mau.dev/mautrix/telegram:latest
+#      restart: unless-stopped
+#      networks:
+#        - matrix
+#      volumes:
+#      - ./mautrix-telegram:/data
+
     postgres:
       image: postgres:16-alpine
       restart: unless-stopped

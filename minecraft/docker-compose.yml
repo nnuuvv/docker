@@ -66,6 +66,7 @@ services:
     ports:
       - "25565:25565"
       - "25567:25567"
+      - "19132:19132/udp"
     networks:
       - proxy
     labels:

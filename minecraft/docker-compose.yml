@@ -53,6 +53,8 @@ services:
         nnuuvv
       ALLOW_FLIGHT: true
       DIFFICULTY: HARD
+      RCON_CMDS_STARTUP: |-
+        player iron_afk spawn at 396 49 -467
     deploy:
       resources:
         limits:

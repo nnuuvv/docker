@@ -1,0 +1,29 @@
+(add_tls) {
+  tls {
+    dns porkbun {
+      api_key {$API_KEY}
+      api_secret_key {$API_SECRET}
+    } 
+  }
+}
+
+doodler.nuv.sh {
+  root /srv/doodler
+  encode
+  try_files {path} /index.html
+  file_server
+}
+
+
+test.nuv.sh {
+  respond "test"
+}
+
+*.test.nuv.sh {
+  import add_tls
+  respond {uri}
+}
+
+
+
+

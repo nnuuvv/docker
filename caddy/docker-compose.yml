@@ -12,6 +12,12 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - caddy_data:/data
       - caddy_config:/config 
+      - ./config:/etc/caddy
+      - /srv:/srv
+    env_file: ".env"
+    environment:
+      CADDY_DOCKER_CADDYFILE_PATH: "/etc/caddy/CADDYFILE"
+      CADDY_DOCKER_ENV_FILE: "/etc/caddy/.env"
     networks:
       - caddy
 

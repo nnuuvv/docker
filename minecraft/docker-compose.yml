@@ -49,11 +49,13 @@ services:
         nnuuvv
         ViTheEgg
         keyschain
+      VANILLATWEAKS_SHARECODE: p02z0a
       OPS: |
         nnuuvv
       ALLOW_FLIGHT: true
       DIFFICULTY: HARD
       RCON_CMDS_STARTUP: |-
+        gamerule mob_griefing false
         player iron_afk spawn at 396 49 -467
     deploy:
       resources:

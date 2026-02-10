@@ -7,6 +7,14 @@
   }
 }
 
+nuv.sh {
+  handle_path /.well-known/* {
+    root /srv/.well-known
+    file_server
+  }
+}
+
+
 doodler.nuv.sh {
   root /srv/doodler
   encode
@@ -23,7 +31,4 @@ test.nuv.sh {
   import add_tls
   respond {uri}
 }
-
-
-
 

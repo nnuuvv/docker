@@ -62,7 +62,7 @@ services:
       - default
 
   app:
-    image: amruthpillai/reactive-resume:latest
+    image: amruthpillai/reactive-resume:v4.5.6
     restart: unless-stopped
     depends_on:
       - postgres

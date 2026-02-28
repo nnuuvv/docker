@@ -1,16 +1,9 @@
 {
-  email admin@nuv.direct
+  email caddy@nuv.direct
   metrics 
+  log
 }
 
-(add_tls) {
-  tls {
-    dns porkbun {
-      api_key {$API_KEY}
-      api_secret_key {$API_SECRET}
-    } 
-  }
-}
 
 :9090 {
   metrics
@@ -47,21 +40,10 @@ nuv.sh {
   }
 }
 
-
 doodler.nuv.sh {
   root /srv/doodler
   encode
   try_files {path} /index.html
   file_server
-}
-
-
-test.nuv.sh {
-  respond "test"
-}
-
-*.test.nuv.sh {
-  import add_tls
-  respond {uri}
 }
 

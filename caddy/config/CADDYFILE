@@ -13,8 +13,7 @@ nuv.sh {
   handle_path /.well-known/* {
     root /srv/.well-known
     file_server
-
-    # cors bullshit
+ # cors bullshit
 
     # Handle preflight requests
     @cors_preflight {
@@ -46,4 +45,3 @@ doodler.nuv.sh {
   try_files {path} /index.html
   file_server
 }
-

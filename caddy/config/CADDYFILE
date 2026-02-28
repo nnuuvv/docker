@@ -1,3 +1,8 @@
+{
+  email admin@nuv.direct
+  metrics 
+}
+
 (add_tls) {
   tls {
     dns porkbun {
@@ -5,6 +10,10 @@
       api_secret_key {$API_SECRET}
     } 
   }
+}
+
+:9090 {
+  metrics
 }
 
 nuv.sh {

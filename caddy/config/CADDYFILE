@@ -1,12 +1,18 @@
 {
   email caddy@nuv.direct
-  metrics 
+  metrics {
+    per_host
+  }
   log
 }
 
 
 :9090 {
   metrics
+}
+
+www.nuv.sh {
+  redir https://nuv.sh{uri} permanent
 }
 
 nuv.sh {
@@ -40,6 +46,7 @@ nuv.sh {
 }
 
 doodler.nuv.sh {
+  log
   root /srv/doodler
   encode
   try_files {path} /index.html

@@ -20,6 +20,8 @@ services:
     networks:
       - grafana
       - proxy
+    ports:
+      - "3000:3000"
     labels:
       caddy_0: grafana.nuv.sh
       caddy_0.reverse_proxy: "{{upstreams 3000}}"

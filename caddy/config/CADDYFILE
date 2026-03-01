@@ -45,6 +45,14 @@ nuv.sh {
   }
 }
 
+cv.nuv.sh {
+  handle /* {
+    redir https://reactive-resume.nuv.sh/nuv{path} permanent
+  }
+
+  redir https://reactive-resume.nuv.sh/nuv/cv permanent
+}
+
 doodler.nuv.sh {
   log
   root /srv/doodler

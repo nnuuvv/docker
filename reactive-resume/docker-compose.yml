@@ -1,6 +1,12 @@
-# In this Docker Compose example, it assumes that you maintain a reverse proxy externally (or chose not to).
-# The only two exposed ports here are from minio (:9000) and the app itself (:3000).
-# If these ports are changed, ensure that the env vars passed to the app are also changed accordingly.
+volumes:
+  minio_data:
+  postgres_data:
+
+networks:
+  default:
+  proxy:
+    external: true
+
 
 services:
   # Database (Postgres)
@@ -26,25 +32,17 @@ services:
     image: minio/minio:latest
     restart: unless-stopped
     command: server /data
-    ports:
-      - "9000:9000"
     volumes:
       - minio_data:/data
     environment:
       MINIO_ROOT_USER: minioadmin
       MINIO_ROOT_PASSWORD: "${MINIO_PASS}"
-
     networks:
       - default
       - proxy
-
     labels:
-      caddy: storage.cv.nuv.sh
+      caddy: storage.reactive-resume.nuv.sh
       caddy.reverse_proxy: "{{upstreams 9000}}"
-      caddy.tls.dns: "porkbun"
-      caddy.tls.dns.api_key: "${API_KEY}"
-      caddy.tls.dns.api_secret_key: "${API_SECRET}"
-      caddy.tls.resolvers: "1.1.1.1"
 
   # Chrome Browser (for printing and previews)
   chrome:
@@ -74,8 +72,8 @@ services:
       NODE_ENV: production
 
       # -- URLs --
-      PUBLIC_URL: https://cv.nuv.sh
-      STORAGE_URL: https://storage.cv.nuv.sh/default
+      PUBLIC_URL: https://reactive-resume.nuv.sh
+      STORAGE_URL: https://storage.ractive-resume.nuv.sh/default
 
       # -- Printer (Chrome) --
       CHROME_TOKEN: chrome_token
@@ -137,20 +135,5 @@ services:
       - proxy
 
     labels:
-      caddy: cv.nuv.sh
+      caddy: reactive-resume.nuv.sh
       caddy.reverse_proxy: "{{upstreams 3000}}"
-      caddy.tls.dns: "porkbun"
-      caddy.tls.dns.api_key: "${API_KEY}"
-      caddy.tls.dns.api_secret_key: "${API_SECRET}"
-      caddy.tls.resolvers: "1.1.1.1"
-
-
-
-volumes:
-  minio_data:
-  postgres_data:
-
-networks:
-  default:
-  proxy:
-    external: true

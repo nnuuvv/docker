@@ -9,11 +9,18 @@ services:
       - "443:443/udp"
       - "9090:9090"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      # config/acme persistence
       - caddy_data:/data
       - caddy_config:/config 
+
+      # caddy docker proxy
+      - /var/run/docker.sock:/var/run/docker.sock
+      # .config/CADDYFILE
       - ./config:/etc/caddy
+      # static file serving
       - /srv:/srv
+      # override for .well-known
+      - ./config/well-known:/srv/.well-known
     env_file: ".env"
     environment:
       CADDY_DOCKER_CADDYFILE_PATH: "/etc/caddy/CADDYFILE"

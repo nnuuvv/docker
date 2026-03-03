@@ -1,0 +1,81 @@
+{
+  # email caddy@nuv.direct
+  metrics 
+#  log
+
+  auto_https off
+
+  servers {
+    trusted_proxies static private_ranges
+  }
+}
+
+:9090 {
+  metrics
+}
+
+# usage:
+# import proxy_for sub.domain.tld name:port sub-domain-tld
+#
+(proxy_for) {
+  @args[2] {
+    header X-Forwarded-Host args[0]
+  }
+
+  handle @args[2] {
+    reverse_proxy args[1]
+  }
+}
+
+# anubis
+:3000 {
+#  log
+
+  @nuv-sh {
+    header X-Forwarded-Host nuv.sh
+  }  
+  
+  handle @nuv-sh {
+    handle_path /.well-known/* {
+      root /srv/.well-known
+      file_server
+
+    # cors bullshit
+
+      # Handle preflight requests
+      @cors_preflight {
+        method OPTIONS
+      }
+
+      header @cors_preflight {
+        Access-Control-Allow-Origin "*"
+        Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+        Access-Control-Allow-Headers "Content-Type, Authorization"
+        Access-Control-Max-Age "86400"
+        Vary "Origin"
+      }
+
+      respond @cors_preflight 204
+
+      # For actual requests
+      header {
+        Access-Control-Allow-Origin "*"
+        Vary "Origin"
+      }
+    } 
+  }
+
+
+  @doodler {
+    header X-Forwarded-Host doodler.nuv.sh
+  }  
+  
+  handle @doodler {
+    root /srv/doodler
+    encode
+    try_files {path} /index.html
+    file_server
+  }
+
+}
+

@@ -1,0 +1,14 @@
+{
+  email caddy@nuv.direct
+  metrics
+  log
+}
+
+:9091 {
+  metrics
+}
+
+nuv.sh, git.nuv.sh, *.nuv.sh {
+  reverse_proxy anubis:3000 
+}
+

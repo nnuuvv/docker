@@ -1,0 +1,68 @@
+volumes:
+  caddy_data:
+  caddy_config:
+  caddy_anubis_data:
+  caddy_anubis_config:
+
+networks:
+  anubis:
+  caddy:
+    name: proxy
+    driver: bridge
+
+
+services:
+  caddy:
+    build: .
+    container_name: caddy
+    restart: unless-stopped
+    command: caddy run --config /etc/caddy/Caddyfile
+    ports: 
+      - "9090:9090" # <- metrics
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - caddy_data:/data
+      - caddy_config:/config 
+      - ./config/Caddyfile-main:/etc/caddy/Caddyfile
+      - /srv:/srv
+    env_file: ".env"
+    environment:
+      CADDY_DOCKER_ENV_FILE: "/etc/caddy/.env"
+    networks:
+      - caddy
+      - anubis
+
+  # handles tls for nuv.sh *.nuv.sh
+  # reverse proxy to anubis
+  caddy-anubis:
+    image: caddy:2
+    container_name: caddy-anubis
+    restart: unless-stopped
+    command: caddy run --config /etc/caddy/Caddyfile
+    ports: 
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+      - "9091:9091" # <- metrics
+    volumes:
+      - caddy_anubis_data:/data
+      - caddy_anubis_config:/config 
+      - ./config/Caddyfile-anubis:/etc/caddy/Caddyfile
+    networks:
+      - anubis
+
+  # handles scraper blocking
+  # sends traffic to caddy
+  anubis:
+    image: ghcr.io/techarohq/anubis:latest
+    container_name: anubis
+    pull_policy: always
+    environment:
+      BIND: ":3000"
+      TARGET: http://caddy:3000
+    networks:
+      - anubis
+#    labels:
+#      caddy_0: git.nuv.sh
+#      caddy_0.reverse_proxy: "{{upstreams 3000}}"
+

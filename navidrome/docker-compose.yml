@@ -1,7 +1,4 @@
 
-volumes:
-  data:
-
 services:
   navidrome:
     image: deluan/navidrome:latest

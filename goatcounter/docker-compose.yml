@@ -1,0 +1,38 @@
+networks:
+  goatcounter:
+  proxy:
+    external: true
+
+volumes:
+  postgres-data:    
+  goatcounter-data: 
+
+services:
+  postgres:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    volumes:  
+      - postgres-data:/var/lib/postgresql
+    environment:
+      - POSTGRES_USER=goatcounter
+      - POSTGRES_PASSWORD=goatcounter
+      - POSTGRES_DATABASE=goatcounter
+    networks:
+      - goatcounter
+
+  goatcounter:
+    image:      arp242/goatcounter:latest
+    container_name: goatcounter
+    restart: unless-stopped
+    volumes:    
+      - goatcounter-data:/home/goatcounter/goatcounter-data
+    environment:
+      - GOATCOUNTER_DB=postgresql+postgresql://goatcounter:goatcounter@postgres:5432/goatcounter?sslmode=disable
+    networks:
+      - goatcounter
+      - proxy
+    labels:
+      caddy: goatcounter.nuv.sh
+      caddy.reverse_proxy: "{{upstreams 8080}}"
+    depends_on: 
+      - postgres

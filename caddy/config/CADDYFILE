@@ -60,3 +60,10 @@ doodler.nuv.sh {
   try_files {path} /index.html
   file_server
 }
+
+page.nuv.sh {
+  root /srv/page
+  encode
+  try_files {path} /index.html
+  file_server
+}

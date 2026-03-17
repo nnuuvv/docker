@@ -7,6 +7,7 @@ services:
     image: deluan/navidrome:latest
     container_name: navidrome
     restart: unless-stopped
+    env_file: .env
     user: 1000:1000 # should be owner of volumes
     volumes:
       - ./data:/data

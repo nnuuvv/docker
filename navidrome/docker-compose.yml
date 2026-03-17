@@ -1,3 +1,6 @@
+networks:
+  proxy:
+    external: true
 
 services:
   navidrome:
@@ -5,8 +8,11 @@ services:
     container_name: navidrome
     restart: unless-stopped
     user: 1000:1000 # should be owner of volumes
-    ports:
-      - "4533:4533"
     volumes:
       - ./data:/data
       - /home/liv/Media/Audio/Music:/music:ro
+    labels:
+      caddy: tunes.nuv.sh
+      caddy.reverse_proxy: "{{upstreams 4533}}"
+    networks:
+      - proxy 

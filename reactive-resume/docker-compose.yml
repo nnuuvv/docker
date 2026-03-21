@@ -73,7 +73,7 @@ services:
 
       # -- URLs --
       PUBLIC_URL: https://reactive-resume.nuv.sh
-      STORAGE_URL: https://storage.ractive-resume.nuv.sh/default
+      STORAGE_URL: https://storage.reactive-resume.nuv.sh/default
 
       # -- Printer (Chrome) --
       CHROME_TOKEN: chrome_token

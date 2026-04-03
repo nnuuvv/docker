@@ -11,7 +11,7 @@ services:
   knot:
     build: 
       context: ./knot-docker/
-      args: { TAG: master }
+      args: { TAG: v1.13.0-alpha }
     restart: unless-stopped
     container_name: tangled_knot
     environment: 

@@ -15,8 +15,6 @@ services:
     labels:
       caddy: home.noraw.app
       caddy.reverse_proxy: "{{upstreams 7575}}"
-      caddy.tls.dns: "cloudflare ${API_Key}"
-      caddy.tls.resolvers: "1.1.1.1"
 
 volumes:
   homarr:

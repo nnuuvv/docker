@@ -60,7 +60,6 @@ services:
       - forgejo
     labels:
       caddy_0: git.nuv.sh
-      caddy_0.log:
       caddy_0.reverse_proxy: "{{upstreams 3000}}"
 
   db:

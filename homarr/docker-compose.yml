@@ -13,14 +13,6 @@ services:
       - '7575:7575'
     networks:
       - proxy
-    labels:
-      caddy: nuv.sh
-      caddy.handle:
-      caddy.handle.reverse_proxy: "{{upstreams 7575}}"
-      caddy.tls.dns: "porkbun"
-      caddy.tls.dns.api_key: "${API_KEY}"
-      caddy.tls.dns.api_secret_key: "${API_SECRET}"
-      caddy.tls.resolvers: "1.1.1.1"
 
 volumes:
   homarr:

@@ -14,10 +14,6 @@ services:
     labels:
       caddy: draw.nuv.sh
       caddy.reverse_proxy: "{{upstreams 80}}"
-      caddy.tls.dns: "porkbun"
-      caddy.tls.dns.api_key: "${API_KEY}"
-      caddy.tls.dns.api_secret_key: "${API_SECRET}"
-      caddy.tls.resolvers: "1.1.1.1"
     volumes:
       - data:/opt/node_app/app:delegated
       - data:/opt/node_app/package.json

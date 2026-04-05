@@ -35,14 +35,6 @@ services:
         labels:
           caddy_0: matrix.nuv.sh
           caddy_0.reverse_proxy: "{{upstreams 6167}}"
-          caddy_0.tls.dns: "porkbun"
-          caddy_0.tls.dns.api_key: "${API_KEY}"
-          caddy_0.tls.dns.api_secret_key: "${API_SECRET}"
-          caddy_0.tls.resolvers: "1.1.1.1"
-#          caddy_1: nuv.sh
-#          caddy_1.0_respond: '/.well-known/matrix/server "{ \"m.server\": \"matrix.nuv.sh\" }"'
-#          caddy_1.1_respond: '/.well-known/matrix/client "{ \"m.homeserver\": { \"base_url\": \"matrix.nuv.sh\" } }"'
-#          caddy_1.2_respond: '/.well-known/discord "dh=023d0b537a304733396fb55473914402092b66dc'
 
     mautrix-discord:
       container_name: mautrix-discord
@@ -90,8 +82,6 @@ services:
       #labels:
         #caddy: chat.nuv.systems
         #caddy.reverse_proxy: "{{upstreams 80}}"
-        #caddy.tls.dns: "ionos ${API_Key}"
-        #caddy.tls.resolvers: "1.1.1.1"
 
 
 volumes:

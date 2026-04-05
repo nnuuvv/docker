@@ -32,10 +32,6 @@ services:
     labels:
       caddy_0: atuin.nuv.sh
       caddy_0.reverse_proxy: "{{upstreams 8888}}"
-      caddy_0.tls.dns: "porkbun"
-      caddy_0.tls.dns.api_key: "${API_KEY}"
-      caddy_0.tls.dns.api_secret_key: "${API_SECRET}"
-      caddy_0.tls.resolvers: "1.1.1.1"
 
   db:
     image: postgres:14

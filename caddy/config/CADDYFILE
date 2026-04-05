@@ -11,6 +11,44 @@
   metrics
 }
 
+www.ollie.earth {
+  redir https://ollie.earth{uri} permanent
+}
+
+ollie.earth {
+
+  # ===================------ ATPROTO ------===================
+  handle_path /.well-known/atproto-did {
+    respond "did:plc:cezmtk5bb4zipkps3abnjjl6"
+  }
+
+  # ================---- Matrix Homeserver ----================
+  handle /.well-known/matrix/* {
+    header Access-Control-Allow-Origin "*"
+    header Content-Type "application/json"
+
+    # Using a Matcher inside the handle to respond differently
+    @server path /.well-known/matrix/server
+    respond @server `{"m.server": "ollie.earth:443"}`
+
+    @client path /.well-known/matrix/client
+    respond @client `{"m.homeserver": {"base_url": "https://ollie.earth"}}`
+  }
+
+  handle /_matrix/* {
+    reverse_proxy matrix:8008
+  }
+
+  handle /_synapse/client/* {
+    reverse_proxy matrix:8008
+  }
+
+  # ===================------ My Site ------===================
+  handle {
+    reverse_proxy homarr:7575
+  }
+}
+
 www.nuv.sh {
   redir https://nuv.sh{uri} permanent
 }
@@ -41,11 +79,14 @@ nuv.sh {
       Access-Control-Allow-Origin "*"
       Vary "Origin"
     }
-
   }
+  handle {
+    redir https://ollie.earth{uri} permanent
+  }
+
 }
 
-cv.nuv.sh {
+cv.nuv.sh, cv.ollie.earth {
   handle /* {
     redir https://reactive-resume.nuv.sh/nuv{path} permanent
   }
@@ -53,7 +94,7 @@ cv.nuv.sh {
   redir https://reactive-resume.nuv.sh/nuv/cv permanent
 }
 
-doodler.nuv.sh {
+doodler.nuv.sh, doodler.ollie.earth {
   log
   root /srv/doodler
   encode
@@ -61,7 +102,7 @@ doodler.nuv.sh {
   file_server
 }
 
-page.nuv.sh {
+page.nuv.sh, page.ollie.earth {
   root /srv/page
   encode
   try_files {path} /index.html

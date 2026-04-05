@@ -15,7 +15,7 @@ services:
     restart: unless-stopped
     container_name: tangled_knot
     environment: 
-      KNOT_SERVER_HOSTNAME: knot.nuv.sh
+      KNOT_SERVER_HOSTNAME: knot.ollie.earth
       KNOT_SERVER_OWNER: ${KNOT_SERVER_OWNER}
       KNOT_SERVER_DB_PATH: /app/knotservr.db
       KNOT_REPO_SCAN_PATH: /home/git/repositories
@@ -29,11 +29,5 @@ services:
     networks:
       - proxy
     labels:
-      caddy_0: knot.nuv.sh
+      caddy_0: knot.ollie.earth
       caddy_0.reverse_proxy: "{{upstreams 5555}}"
-      caddy_0.tls.dns: "porkbun"
-      caddy_0.tls.dns.api_key: "${API_KEY}"
-      caddy_0.tls.dns.api_secret_key: "${API_SECRET}"
-      caddy_0.tls.resolvers: "1.1.1.1"
-      caddy_1: nuv.sh
-#      caddy_1.0_respond: '/.well-known/atproto-did "${KNOT_SERVER_OWNER}"'

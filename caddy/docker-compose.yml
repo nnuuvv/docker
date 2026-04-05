@@ -1,6 +1,6 @@
 services:
   caddy:
-    build: .
+    image: lucaslorentz/caddy-docker-proxy
     container_name: caddy
     restart: unless-stopped
     ports: 

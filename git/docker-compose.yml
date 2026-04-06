@@ -31,7 +31,7 @@ services:
       - FORGEJO__database__PASSWD=forgejo
       - FORGEJO__DEFAULT__APP_NAME="Butter dog"
       - FORGEJO__DEFAULT__APP_SLOGAN="the dog with the butter"
-      - FORGEJO__server__ROOT_URL=https://git.nuv.sh
+      - FORGEJO__server__ROOT_URL=https://git.ollie.earth
       - FORGEJO__server__OFFLINE_MODE=false
       - FORGEJO__mirror__ENABLED=true
     networks:
@@ -59,7 +59,7 @@ services:
       - proxy
       - forgejo
     labels:
-      caddy_0: git.nuv.sh
+      caddy_0: git.ollie.earth
       caddy_0.reverse_proxy: "{{upstreams 3000}}"
 
   db:

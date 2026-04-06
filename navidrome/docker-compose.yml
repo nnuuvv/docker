@@ -13,7 +13,9 @@ services:
       - ./data:/data
       - /home/liv/Media/Audio/Music:/music:ro
     labels:
-      caddy: tunes.nuv.sh
-      caddy.reverse_proxy: "{{upstreams 4533}}"
+      caddy_0: tunes.nuv.sh
+      caddy_0.reverse_proxy: "{{upstreams 4533}}"
+      caddy_1: tunes.ollie.earth
+      caddy_1.reverse_proxy: "{{upstreams 4533}}"
     networks:
       - proxy 

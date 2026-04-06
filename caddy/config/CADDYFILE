@@ -45,8 +45,15 @@ ollie.earth {
 
   # ===================------ My Site ------===================
   handle {
-    reverse_proxy homarr:7575
+    root /srv/page
+    encode
+    try_files {path} /index.html
+    file_server
   }
+}
+
+ci.ollie.earth {
+  redir https://ci.nuv.sh
 }
 
 www.nuv.sh {
@@ -103,8 +110,5 @@ doodler.nuv.sh, doodler.ollie.earth {
 }
 
 page.nuv.sh, page.ollie.earth {
-  root /srv/page
-  encode
-  try_files {path} /index.html
-  file_server
+  redir https://ollie.earth permanent
 }

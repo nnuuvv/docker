@@ -31,3 +31,5 @@ services:
     labels:
       caddy_0: knot.ollie.earth
       caddy_0.reverse_proxy: "{{upstreams 5555}}"
+      caddy_1: knot.nuv.sh
+      caddy_1.reverse_proxy: "{{upstreams 5555}}"

@@ -90,10 +90,13 @@ nuv.sh {
   handle {
     redir https://ollie.earth{uri} permanent
   }
-
 }
 
-cv.nuv.sh, cv.ollie.earth {
+cv.nuv.sh {
+  redir https://cv.ollie.earth{uri} permanent
+}
+
+cv.ollie.earth {
   handle /* {
     redir https://reactive-resume.nuv.sh/nuv{path} permanent
   }
@@ -101,7 +104,11 @@ cv.nuv.sh, cv.ollie.earth {
   redir https://reactive-resume.nuv.sh/nuv/cv permanent
 }
 
-doodler.nuv.sh, doodler.ollie.earth {
+doodler.nuv.sh {
+  redir https://doodler.ollie.earth{uri} permanent
+}
+
+doodler.ollie.earth {
   log
   root /srv/doodler
   encode
@@ -109,6 +116,18 @@ doodler.nuv.sh, doodler.ollie.earth {
   file_server
 }
 
-page.nuv.sh, page.ollie.earth {
+page.ollie.earth {
   redir https://ollie.earth permanent
+}
+
+git.nuv.sh {
+  redir https://git.ollie.earth{uri} permanent
+}
+
+ci.nuv.sh {
+  redir https://ci.ollie.earth{uri} permanent
+}
+
+tunes.nuv.sh {
+  redir https://tunes.ollie.earth{uri} permanent
 }

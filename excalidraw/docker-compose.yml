@@ -2,7 +2,7 @@ services:
   excalidraw:
     image: excalidraw/excalidraw:latest
     container_name: excalidraw
-    hostname: "draw.nuv.systems"    
+    hostname: "draw.ollie.earth"    
     restart: unless-stopped
     stdin_open: true
     healthcheck:
@@ -12,7 +12,7 @@ services:
     networks:
       - proxy
     labels:
-      caddy: draw.nuv.sh
+      caddy: draw.ollie.earth
       caddy.reverse_proxy: "{{upstreams 80}}"
     volumes:
       - data:/opt/node_app/app:delegated

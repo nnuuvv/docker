@@ -1,7 +1,7 @@
 volumes:
   tangled_keys:
-  tangled_repos:
   tangled_server:
+  tangled_server1:
 
 networks:
   proxy:
@@ -20,7 +20,7 @@ services:
       KNOT_SERVER_INTERNAL_LISTEN_ADDR: localhost:5444
     volumes:
       - tangled_keys:/etc/ssh/keys
-      - tangled_repos:/home/git/repositories
+      - ./data/repos:/home/git/repositories
       - tangled_server:/app
     ports: 
       - "2222:22"

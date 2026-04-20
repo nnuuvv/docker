@@ -52,10 +52,6 @@ ollie.earth {
   }
 }
 
-ci.ollie.earth {
-  redir https://ci.nuv.sh
-}
-
 www.nuv.sh {
   redir https://nuv.sh{uri} permanent
 }

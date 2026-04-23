@@ -11,6 +11,10 @@
   metrics
 }
 
+*.mar.ollie.earth {
+  reverse_proxy http://mar-backups.fritz.box
+}
+
 www.ollie.earth {
   redir https://ollie.earth{uri} permanent
 }

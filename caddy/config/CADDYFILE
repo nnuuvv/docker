@@ -4,6 +4,9 @@
     per_host
   }
   log
+  on_demand_tls {
+    ask http://mar-backups.fritz.box:9999/ask
+  }
 }
 
 
@@ -12,6 +15,9 @@
 }
 
 *.mar.ollie.earth {
+  tls {
+    on_demand
+  }
   reverse_proxy http://mar-backups.fritz.box
 }
 
@@ -20,7 +26,6 @@ www.ollie.earth {
 }
 
 ollie.earth {
-
   # ===================------ ATPROTO ------===================
   handle_path /.well-known/atproto-did {
     respond "did:plc:cezmtk5bb4zipkps3abnjjl6"

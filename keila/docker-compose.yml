@@ -27,3 +27,5 @@ services:
     env_file: ".env"
     networks:
       - keila
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
